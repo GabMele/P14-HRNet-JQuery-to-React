@@ -12,7 +12,14 @@ const DatePicker = ({ value, onChange }) => {
     onChange(newDate); // Pass the formatted date
   };
 
-  return <input type="date" value={value || ""} onChange={handleChange} required />;
-};
+  return (
+    <input 
+      type="date" 
+      value={value || ""} 
+      onChange={handleChange}
+      min="0000-01-01"
+      max={new Date().toISOString().split("T")[0]} // Example: Maximum date (today)
+      required />
+)};
 
 export default DatePicker;

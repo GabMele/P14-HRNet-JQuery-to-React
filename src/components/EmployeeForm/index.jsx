@@ -1,22 +1,30 @@
 import { useState } from "react";
 import { useDispatch } from "react-redux";
 import { addEmployee } from "@/features/employeesSlice";
-import StateSelect from "./StateSelect";
+import states from "@/data/states.json";
+import departments from "@/data/departments.json";
+import SelectOption from "./SelectOption";
 import DatePicker from "./DatePicker";
+//import Modal from "./Modal";
+import { Modal } from "react-modal-library";
 import styles from "./EmployeeForm.module.scss";
+
 
 const EmployeeForm = () => {
   const dispatch = useDispatch();
+  //const [modalMessage, setModalMessage] = useState("");
+  const [isModalOpen, setIsModalOpen] = useState(false); 
+
   const [form, setForm] = useState({
     firstName: "",
     lastName: "",
     dateOfBirth: "",
     startDate: "",
-    department: "",
     street: "",
     city: "",
     state: "",
     zipCode: "",
+    department: ""
   });
 
   const handleInputChange = (e) => {
@@ -27,19 +35,18 @@ const EmployeeForm = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
     dispatch(addEmployee(form));
-    alert("Employee added successfully!");
+    setIsModalOpen(true);
 
-    // Reset form after submission
     setForm({
       firstName: "",
       lastName: "",
       dateOfBirth: "",
       startDate: "",
-      department: "",
       street: "",
       city: "",
       state: "",
       zipCode: "",
+      department: ""
     });
   };
 
@@ -67,7 +74,7 @@ const EmployeeForm = () => {
         <div className={styles.inputWrapper}>
           <DatePicker
             value={form.dateOfBirth}
-            onChange={(date) => setForm((prev) => ({ ...prev, dateOfBirth: date }))}
+            onChange={(selectedDate) => setForm((prev) => ({ ...prev, dateOfBirth: selectedDate }))}
           />
           <label htmlFor="dateOfBirth">Date of Birth</label>
         </div>
@@ -75,27 +82,60 @@ const EmployeeForm = () => {
         <div className={styles.inputWrapper}>
           <DatePicker
             value={form.startDate}
-            onChange={(date) => setForm((prev) => ({ ...prev, startDate: date }))}
+            onChange={(selectedDate) => setForm((prev) => ({ ...prev, startDate: selectedDate  }))}
           />
           <label htmlFor="startDate">Start Date</label>
         </div>
 
-        {renderInputField("department", "Department", "text", true)}
-        {renderInputField("street", "Street", "text", true)}
-        {renderInputField("city", "City", "text", true)}
+        <fieldset className={styles.address}>
+          <legend>Address</legend>
+
+          {renderInputField("street", "Street", "text", true)}
+          {renderInputField("city", "City", "text", true)}
+
+          <div className={styles.inputWrapper}>
+            <SelectOption
+              options={states}
+              value={form.state}
+              onChange={(selectedState) => 
+                setForm((prev) => ({ ...prev, state:selectedState  }))}
+              label="State"
+              keyField="abbreviation"
+              valueField="name"
+            />
+            <label htmlFor="state">State</label>
+          </div>
+
+          {renderInputField("zipCode", "Zip Code", "text", true)}
+
+        </fieldset>
 
         <div className={styles.inputWrapper}>
-          <StateSelect
-            value={form.state}
-            onChange={(state) => setForm((prev) => ({ ...prev, state }))}
-          />
-          <label htmlFor="state">State</label>
-        </div>
-
-        {renderInputField("zipCode", "Zip Code", "text", true)}
+            <SelectOption
+              options={departments}
+              value={form.department} 
+              onChange={(selectedDepartment) => setForm((prev) => 
+                ({ ...prev, department: selectedDepartment }))}
+              label="Department"
+              keyField="abbreviation"
+              valueField="name"
+            />
+          </div>
 
         <button type="submit">Save Employee</button>
       </form>
+{/* 
+      <Modal isOpen={isModalOpen} onClose={() => setIsModalOpen(false)}>
+          <p>Employee Created!</p>
+      </Modal> */}
+
+      {isModalOpen && (
+  <Modal isOpen={isModalOpen} onClose={() => setIsModalOpen(false)}>
+    <p>Employee Created!</p>
+  </Modal>
+)}
+
+
     </div>
   );
 };

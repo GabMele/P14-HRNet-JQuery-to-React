@@ -1,8 +1,8 @@
 // src/components/StateSelect.js
 
-import states from "@/data/states.json";
 
-const StateSelect = ({ value, onChange, required = true }) => {
+const SelectOption = ({ options, value, onChange, 
+    label, keyField, valueField, required = true }) => {
   const handleChange = (e) => {
     const selectedValue = e.target.value; // Extract the value from the event
     onChange(selectedValue); // Pass the value to the parent
@@ -10,14 +10,16 @@ const StateSelect = ({ value, onChange, required = true }) => {
 
   return (
     <select value={value || ""} onChange={handleChange} required={required}>
-      <option value="" disabled>Select a state</option>
-      {states.map((state) => (
-        <option key={state.abbreviation} value={state.abbreviation}>
-          {state.name}
+      <option value="" disabled>
+        Select a {label}
+      </option>
+      {options.map((option) => (
+        <option key={option[keyField]} value={option[valueField]}>
+          {option.name}
         </option>
       ))}
     </select>
   );
 };
 
-export default StateSelect;
+export default SelectOption;

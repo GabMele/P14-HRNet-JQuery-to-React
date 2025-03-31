@@ -1,7 +1,7 @@
 import { createSlice } from "@reduxjs/toolkit";
 
 const initialState = {
-  employees: [],
+  employeesList: [],
 };
 
 const employeesSlice = createSlice({
@@ -9,7 +9,7 @@ const employeesSlice = createSlice({
   initialState,
   reducers: {
     addEmployee: (state, action) => {
-      state.employees.push(action.payload);
+      state.employeesList.push(action.payload);
     },
   },
 });

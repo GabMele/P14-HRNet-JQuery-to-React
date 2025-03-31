@@ -7,7 +7,7 @@ const HomePage = () => {
   return (
     <>
       <h1>HRNet - Home Page</h1>
-      <Link to="/employees">Employee List</Link>
+      <Link to="/employeeslistpage">Current Employees</Link>
       <EmployeeForm />
     </>
   )
