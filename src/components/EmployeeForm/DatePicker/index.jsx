@@ -6,7 +6,7 @@
 // export default DatePicker;
 
 
-const DatePicker = ({ value, onChange }) => {
+const DatePicker = ({ value, onChange, id }) => {
   const handleChange = (e) => {
     const newDate = e.target.value; // This is already in "YYYY-MM-DD"
     onChange(newDate); // Pass the formatted date
@@ -14,6 +14,7 @@ const DatePicker = ({ value, onChange }) => {
 
   return (
     <input 
+      id={id}
       type="date" 
       value={value || ""} 
       onChange={handleChange}

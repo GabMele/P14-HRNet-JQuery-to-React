@@ -9,11 +9,10 @@ import DatePicker from "./DatePicker";
 import { Modal } from "@gabmele/react-modal";
 import styles from "./EmployeeForm.module.scss";
 
-
 const EmployeeForm = () => {
   const dispatch = useDispatch();
   //const [modalMessage, setModalMessage] = useState("");
-  const [isModalOpen, setIsModalOpen] = useState(false); 
+  const [isModalOpen, setIsModalOpen] = useState(false);
 
   const [form, setForm] = useState({
     firstName: "",
@@ -24,7 +23,7 @@ const EmployeeForm = () => {
     city: "",
     state: "",
     zipCode: "",
-    department: ""
+    department: "",
   });
 
   const handleInputChange = (e) => {
@@ -46,15 +45,21 @@ const EmployeeForm = () => {
       city: "",
       state: "",
       zipCode: "",
-      department: ""
+      department: "",
     });
   };
 
-  const renderInputField = (name, placeholder, type = "text", required = false) => (
+  const renderInputField = (
+    name,
+    placeholder,
+    type = "text",
+    required = false
+  ) => (
     <div className={styles.inputWrapper}>
       <input
         type={type}
         name={name}
+        id={name}
         value={form[name]}
         onChange={handleInputChange}
         placeholder=" "
@@ -74,7 +79,10 @@ const EmployeeForm = () => {
         <div className={styles.inputWrapper}>
           <DatePicker
             value={form.dateOfBirth}
-            onChange={(selectedDate) => setForm((prev) => ({ ...prev, dateOfBirth: selectedDate }))}
+            onChange={(selectedDate) =>
+              setForm((prev) => ({ ...prev, dateOfBirth: selectedDate }))
+            }
+            id="dateOfBirth"
           />
           <label htmlFor="dateOfBirth">Date of Birth</label>
         </div>
@@ -82,7 +90,10 @@ const EmployeeForm = () => {
         <div className={styles.inputWrapper}>
           <DatePicker
             value={form.startDate}
-            onChange={(selectedDate) => setForm((prev) => ({ ...prev, startDate: selectedDate  }))}
+            onChange={(selectedDate) =>
+              setForm((prev) => ({ ...prev, startDate: selectedDate }))
+            }
+            id="startDate"
           />
           <label htmlFor="startDate">Start Date</label>
         </div>
@@ -97,45 +108,46 @@ const EmployeeForm = () => {
             <SelectOption
               options={states}
               value={form.state}
-              onChange={(selectedState) => 
-                setForm((prev) => ({ ...prev, state:selectedState  }))}
+              onChange={(selectedState) =>
+                setForm((prev) => ({ ...prev, state: selectedState }))
+              }
               label="State"
               keyField="abbreviation"
               valueField="name"
+              id="state"
             />
             <label htmlFor="state">State</label>
           </div>
 
           {renderInputField("zipCode", "Zip Code", "text", true)}
-
         </fieldset>
 
         <div className={styles.inputWrapper}>
-            <SelectOption
-              options={departments}
-              value={form.department} 
-              onChange={(selectedDepartment) => setForm((prev) => 
-                ({ ...prev, department: selectedDepartment }))}
-              label="Department"
-              keyField="abbreviation"
-              valueField="name"
-            />
-          </div>
+          <SelectOption
+            options={departments}
+            value={form.department}
+            onChange={(selectedDepartment) =>
+              setForm((prev) => ({ ...prev, department: selectedDepartment }))
+            }
+            label="Department"
+            keyField="abbreviation"
+            valueField="name"
+            id="department"
+          />
+        </div>
 
         <button type="submit">Save Employee</button>
       </form>
-{/* 
+      {/* 
       <Modal isOpen={isModalOpen} onClose={() => setIsModalOpen(false)}>
           <p>Employee Created!</p>
       </Modal> */}
 
       {isModalOpen && (
-  <Modal isOpen={isModalOpen} onClose={() => setIsModalOpen(false)}>
-    <p>Employee Created!</p>
-  </Modal>
-)}
-
-
+        <Modal isOpen={isModalOpen} onClose={() => setIsModalOpen(false)}>
+          <p>Employee Created!</p>
+        </Modal>
+      )}
     </div>
   );
 };
