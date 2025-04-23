@@ -9,12 +9,6 @@ import DataTable from "react-data-table-component";
 const EmployeesTable = () => {
 
   const employees = useSelector(state => state.employees.employeesList);
-//   const [employees, setEmployees] = useState([]);
-
-//   useEffect(() => {
-//     const storedEmployees = JSON.parse(localStorage.getItem("employees")) || [];
-//     setEmployees(storedEmployees);
-//   }, []);
 
   const [search, setSearch] = useState("");
 

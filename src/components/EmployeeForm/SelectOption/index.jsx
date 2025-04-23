@@ -1,6 +1,5 @@
 // src/components/StateSelect.js
 
-
 const SelectOption = ({ options, value, onChange, 
     label, keyField, valueField, required = true, id }) => {
   const handleChange = (e) => {

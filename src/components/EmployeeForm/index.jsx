@@ -5,7 +5,6 @@ import states from "@/data/states.json";
 import departments from "@/data/departments.json";
 import SelectOption from "./SelectOption";
 import DatePicker from "./DatePicker";
-//import Modal from "./Modal";
 import { Modal } from "@gabmele/react-modal";
 import styles from "./EmployeeForm.module.scss";
 

@@ -1,10 +1,4 @@
 // src/components/DatePicker.js
-// const DatePicker = ({ value, onChange }) => {
-//   return <input type="date" value={value} onChange={onChange} required />;
-// };
-
-// export default DatePicker;
-
 
 const DatePicker = ({ value, onChange, id }) => {
   const handleChange = (e) => {
