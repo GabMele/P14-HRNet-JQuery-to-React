@@ -1,6 +1,9 @@
 /* global.css */
 
 :root {
+  --accent: #369;  
+  --accent-hover: #257;  /* Slightly darker on hover */
+  --accent-focus-glow: rgba(51, 102, 153, 0.3);  /* Soft glow */
   font-family: system-ui, Avenir, Helvetica, Arial, sans-serif;
   line-height: 1.5;
   font-weight: 400;
@@ -12,7 +15,6 @@ body {
   min-height: 100vh;
   display: flex;
   justify-content: center;
-  align-items: center;
 }
 
 #root {
@@ -28,10 +30,29 @@ h1 {
 a {
   font-weight: 500;
   text-decoration: none;
+  color: var(--accent);
 }
 a:hover {
-  color: #535bf2;
+  color: var(--accent-hover);
 }
+
+
+input,
+select {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid;
+  font-size: 1rem;
+  outline: none;
+  transition: border 0.2s, box-shadow 0.2s;
+  box-sizing: border-box;
+}
+input:focus,
+select:focus {
+  border-color: var(--accent-hover);
+  box-shadow: 0 0 0 3px var(--accent-focus-glow);
+}
+
 
 button {
   border-radius: 8px;
@@ -41,12 +62,12 @@ button {
   font-weight: 500;
   font-family: inherit;
   color: #fff;
-  background-color: #444;
+  background-color: var(--accent);
   cursor: pointer;
   transition: background-color 0.25s;
 }
 button:hover {
-  background-color: #000;
+  background-color: var(--accent-hover);
 }
 button:focus,
 button:focus-visible {

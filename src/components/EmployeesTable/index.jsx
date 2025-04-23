@@ -1,6 +1,5 @@
 // src/components/EmployeesList/index.jsx
 
-// import { useEffect, useState } from "react";
 import { useState } from "react";
 import { useSelector } from "react-redux";
 import DataTable from "react-data-table-component";
@@ -33,8 +32,7 @@ const EmployeesTable = () => {
 
   return (
     <div>
-      <h2>Current Employees</h2>
-
+      {employees.length > 0 && (
       <div className={styles.search}>
         <span>Search:</span>
         <input
@@ -44,6 +42,7 @@ const EmployeesTable = () => {
           onChange={(e) => setSearch(e.target.value)}
         />
       </div>
+      )}
 
       <DataTable
         columns={columns}
