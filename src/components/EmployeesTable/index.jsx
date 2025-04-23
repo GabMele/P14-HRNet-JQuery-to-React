@@ -4,6 +4,7 @@
 import { useState } from "react";
 import { useSelector } from "react-redux";
 import DataTable from "react-data-table-component";
+import styles from "./EmployeesTable.module.scss";
 
 
 const EmployeesTable = () => {
@@ -34,14 +35,15 @@ const EmployeesTable = () => {
     <div>
       <h2>Current Employees</h2>
 
-      <span>Search:</span>
-      <input
-        type="text"
-        placeholder="Search by any field"
-        value={search}
-        onChange={(e) => setSearch(e.target.value)}
-        style={{ marginBottom: "10px", padding: "5px", width: "100%" }}
-      />
+      <div className={styles.search}>
+        <span>Search:</span>
+        <input
+          type="text"
+          placeholder="Search by any field"
+          value={search}
+          onChange={(e) => setSearch(e.target.value)}
+        />
+      </div>
 
       <DataTable
         columns={columns}
